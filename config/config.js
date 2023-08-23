@@ -8,6 +8,11 @@ module.exports = {
         dialect: 'postgres',
     },
     production: {
-        //
+        username: 'doadmin',
+        password: 'AVNS_S_rrptiYWztutn7TRtg',
+        database: 'defaultdb',
+        host: 'db-postgresql-sgp1-16869-do-user-14561627-0.b.db.ondigitalocean.com',
+        port: '25060',
+        dialect: 'postgres',
     },
 };

@@ -1,11 +1,20 @@
 const Sequelize = require('sequelize');
 const dbConf = require('./config')
 // Создание экземпляра Sequelize
-const sequelize = new Sequelize(dbConf.development.database, dbConf.development.username, dbConf.development.password, {
-  host: dbConf.development.host,
-  port: dbConf.development.port,
-  dialect: dbConf.development.dialect,
-});
+let sequelize;
+if(process.env.NODE_ENV === "production"){
+  sequelize = new Sequelize(dbConf.production.database, dbConf.production.username, dbConf.production.password, {
+    host: dbConf.production.host,
+    port: dbConf.production.port,
+    dialect: dbConf.production.dialect,
+  });  
+} else {
+  sequelize = new Sequelize(dbConf.development.database, dbConf.development.username, dbConf.development.password, {
+    host: dbConf.development.host,
+    port: dbConf.development.port,
+    dialect: dbConf.development.dialect,
+  });  
+}
 
 // Тестирование подключения
 sequelize
