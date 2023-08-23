@@ -21,7 +21,7 @@ app.use(require('./app/user/routes'))
 app.use(require('./app/subscription/routes'))
 app.use(require('./app/comment/routes'))
 app.use(require('./app/story/routes'))
-
+app.use(express.static(__dirname + '/media'))
 const port = 8000;
 app.listen(port, () => {
     console.log(`Server is listening on PORT ${port}`)
