@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs')
 module.exports = {
     development: {
         username: 'instagram',
@@ -14,5 +16,10 @@ module.exports = {
         host: 'db-postgresql-sgp1-16869-do-user-14561627-0.b.db.ondigitalocean.com',
         port: '25060',
         dialect: 'postgres',
+        dialectOptions: {
+            ssl: {
+              ca: fs.readFileSync(path.resolve("config","ca-certificate.crt")),
+            },
+          }
     },
 };

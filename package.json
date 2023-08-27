@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "prod": "NODE_ENV=production nodemon server.js"
+    "prod": "NODE_ENV=production nodemon server.js",
+    "migrations": "NODE_ENV=production sequelize db:migrate",
+    "seeds": "NODE_ENV=production sequelize db:seed:all"
   },
   "author": "Irkenaliyev",
   "license": "ISC",
