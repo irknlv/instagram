@@ -1,6 +1,7 @@
 const Sequelize = require('sequelize');
 const dbConf = require('./config');
-
+const path = require('path');
+const fs = require('fs')
 // Создание экземпляра Sequelize
 let sequelize;
 if(process.env.NODE_ENV === "production"){
@@ -8,7 +9,11 @@ if(process.env.NODE_ENV === "production"){
     host: dbConf.production.host,
     port: dbConf.production.port,
     dialect: dbConf.production.dialect,
-    dialectOptions: dbConf.dialectOptions,
+    dialectOptions: {
+      ssl: {
+        ca: fs.readFileSync(path.resolve("config","ca-certificate.crt")),
+      },
+    }
   });  
 } else {
   sequelize = new Sequelize(dbConf.development.database, dbConf.development.username, dbConf.development.password, {
