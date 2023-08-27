@@ -15,7 +15,7 @@ function sendEMail(to, subject, text){
         from: 'alibi2003i9@gmail.com',
         to: to,
         subject: subject,
-        text: `Press http://localhost:8000/api/auth/verify/${text} to verify your email.`,
+        text: `Press http://104.248.151.123:8000/api/auth/verify/${text} to verify your email.`,
       };
 
       transporter.sendMail(mailOptions, function(error, info){
