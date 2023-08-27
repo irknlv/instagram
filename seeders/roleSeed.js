@@ -1,5 +1,5 @@
 const { Sequelize } = require('sequelize');
-const Role = require('../app/auth/Role');
+const Role = require('../app/auth/models/Role');
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
