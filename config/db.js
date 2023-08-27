@@ -8,6 +8,7 @@ if(process.env.NODE_ENV === "production"){
     host: dbConf.production.host,
     port: dbConf.production.port,
     dialect: dbConf.production.dialect,
+    dialectOptions: dbConf.dialectOptions,
   });  
 } else {
   sequelize = new Sequelize(dbConf.development.database, dbConf.development.username, dbConf.development.password, {
