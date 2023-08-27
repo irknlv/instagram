@@ -41,6 +41,7 @@ module.exports = {
           model: 'Comment',
           key: 'id',
         },
+        allowNull: true,
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
       },

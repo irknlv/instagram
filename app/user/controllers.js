@@ -76,7 +76,7 @@ const editEmail = async(req, res) => {
         {
             where: {id: req.user.id}
         })
-        res.status(200).end()
+        res.status(200).send({message: 'На вашу почту было выслано письмо с верификацией'})
     } else { 
         res.status(400).end()
     }
