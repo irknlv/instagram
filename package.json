@@ -8,7 +8,9 @@
     "start": "nodemon server.js",
     "prod": "NODE_ENV=production nodemon server.js",
     "migrations": "NODE_ENV=production sequelize db:migrate",
-    "seeds": "NODE_ENV=production sequelize db:seed:all"
+    "seeds": "NODE_ENV=production sequelize db:seed:all",
+    "migrationsundo": "NODE_ENV=production sequelize db:migrate:undo:all"
+
   },
   "author": "Irkenaliyev",
   "license": "ISC",
