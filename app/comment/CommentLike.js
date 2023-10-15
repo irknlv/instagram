@@ -15,10 +15,11 @@ const CommentLike = sequelize.define('CommentLike', {
     freezeTableName: true,
 });
 
+
 CommentLike.belongsTo(User, {
   foreignKey: 'userId',
+  as: 'user',
 });
-
 CommentLike.belongsTo(Comment, {
   foreignKey: 'commentId',
 });
