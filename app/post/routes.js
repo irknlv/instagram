@@ -29,7 +29,7 @@ router.delete('/api/post/:id', passport.authenticate('jwt', {session: false}), i
 
 router.post('/api/post/like', passport.authenticate('jwt', {session: false}), likePost);
 router.post('/api/post/dislike', passport.authenticate('jwt', {session: false}), disLikePost);
-router.get('/api/likes/:postId', getLikesByPost)
+router.get('/api/post/likes/:postId', getLikesByPost)
 
 router.post('/api/post/save', passport.authenticate('jwt', {session: false}), savePost);
 router.post('/api/post/unSave', passport.authenticate('jwt', {session: false}), unSavePost);

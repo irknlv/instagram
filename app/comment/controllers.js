@@ -1,3 +1,4 @@
+const User = require('../auth/models/User');
 const Comment = require('./Comment');
 const CommentLike = require('./CommentLike');
 
@@ -51,6 +52,10 @@ const getCommentsByPost = async(req, res) => {
     const comments = await Comment.findAll({
         where: {
             postId: req.params.id
+        },
+        include: {
+            model: User,
+            as: 'user'
         } 
     })
     if(comments){
@@ -114,10 +119,28 @@ const disLikeComment = async(req, res) => {
         res.status(403).send({message: 'Комментарий не найден'})
     }
 }
+
+const getLikesByComment = async(req, res) => {
+    const likes = await CommentLike.findAll({
+        where: {
+            commentId: req.params.comId
+        },
+        include: {
+            model: User,
+            as: 'user'
+        }
+    })
+    if(likes){
+        res.status(200).send(likes);
+    } else {
+        res.status(400);
+    }
+}
 module.exports = {
     writeComment,
     deleteComment,
     getCommentsByPost,
     likeComment,
     disLikeComment,
+    getLikesByComment
 }

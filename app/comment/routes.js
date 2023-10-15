@@ -6,6 +6,7 @@ const {
     getCommentsByPost,
     likeComment,
     disLikeComment,
+    getLikesByComment
 } = require('./controllers')
 
 const passport = require('passport');
@@ -16,5 +17,5 @@ router.get('/api/comment/post/:id', getCommentsByPost)
 
 router.post('/api/comment/like', passport.authenticate('jwt', {session: false}), likeComment);
 router.post('/api/comment/dislike', passport.authenticate('jwt', {session: false}), disLikeComment);
-
+router.get('/api/comment/likes/:comId', getLikesByComment)
 module.exports = router;
