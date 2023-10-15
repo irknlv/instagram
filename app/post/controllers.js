@@ -38,6 +38,10 @@ const getAllPosts = async(req, res) => {
             {
                 model: MediaFile,
                 as: 'mediaFiles'
+            },
+            {
+                model: User,
+                as: 'user'
             }
         ]
     })
@@ -49,13 +53,22 @@ const getMyPosts = async(req, res) => {
             {
                 model: MediaFile,
                 as: 'mediaFiles'
+            },
+            {
+                model: User,
+                as: 'user'
             }
         ]
     })
     res.status(200).send(posts)
 }
 const getPostById = async(req, res) => {
-    const post = await Post.findByPk(req.params.id)
+    const post = await Post.findOne({where: {id: req.params.id},
+        include: [{
+            model: User,
+            as: 'user'
+        }]
+    })
     if(post){
         res.status(200).send(post);
     } else{
@@ -70,6 +83,10 @@ const getPostsByUser = async(req, res) => {
                 {
                     model: MediaFile,
                     as: 'mediaFiles'
+                },
+                {
+                    model: User,
+                    as: 'user'
                 }
             ]
         })
@@ -170,6 +187,24 @@ const disLikePost = async(req, res) => {
         res.status(403).send({message: 'Пост не найден'})
     }
 }
+
+const getLikesByPost = async(req, res) => {
+    const likes = await PostLike.findAll({
+        where: {
+            postId: req.params.postId
+        },
+        include: {
+            model: User,
+            as: 'user'
+        }
+    })
+    if(likes){
+        res.status(200).send(likes);
+    } else {
+        res.status(400);
+    }
+}
+
 const savePost = async(req, res) => {
     if(req.body.postId){
         const post = await Post.findByPk(req.body.postId)
@@ -224,6 +259,24 @@ const unSavePost = async(req, res) => {
         res.status(403).send({message: 'Пост не найден'})
     }
 }
+const getSavedPosts = async(req, res) => {
+    const posts = await PostSaved.findAll({
+        where: {
+            userId: req.user.id
+        },
+        include: [
+            {
+                model: User,
+                as: 'user'
+            },
+            {
+                model: Post,
+                as: 'post'
+            },
+        ]
+    })
+    res.status(200).send(posts);
+}
 module.exports = {
     createPost,
     getAllPosts,
@@ -236,4 +289,6 @@ module.exports = {
     disLikePost,
     savePost,
     unSavePost,
+    getLikesByPost,
+    getSavedPosts
 }

@@ -93,7 +93,16 @@ const getUser = async(req, res) => {
     }
 
 }
-
+const getUserById = async(req, res) => {
+    if(req.params.id && req.params.id.length > 0){
+        const user = await User.findOne({where: {id: req.params.id}})
+        if(user){
+            res.status(200).send(user);
+        } else {
+        res.status(400).send({message: 'Такого пользователя не существует!'})
+        }
+    }
+}
 const getInfoAboutMe = async(req, res) => {
     if(req.user){
         res.status(200).send(req.user);
@@ -106,5 +115,6 @@ module.exports = {
     editUser,
     editEmail,
     getUser,
-    getInfoAboutMe
+    getInfoAboutMe,
+    getUserById,
 };
